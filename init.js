@@ -91,10 +91,12 @@ async function init() {
                                     name: 'salary',
                                     message: 'What is the salary of the role?',
                                     validate: salaryInput => {
-                                        if (salaryInput) {
+                                        if (Number.isInteger(Number(salaryInput))) {
+                                            
                                             return true;
                                         } else {
-                                            console.log('Please Add A Salary!');
+                                            console.log('Please Add A Salary using Numbers');
+                                            
                                             return false;
                                         }
                                     }
@@ -141,7 +143,7 @@ async function init() {
                                         if (firstNameInput) {
                                             return true;
                                         } else {
-                                            console.log('Please Add A First Name!');
+                                            console.log('Please Add A First Name');
                                             return false;
                                         }
                                     }
@@ -154,7 +156,7 @@ async function init() {
                                         if (lastNameInput) {
                                             return true;
                                         } else {
-                                            console.log('Please Add A Salary!');
+                                            console.log('Please Add A Last Name');
                                             return false;
                                         }
                                     }
@@ -193,7 +195,7 @@ async function init() {
                                     }
                                 }
 
-                                db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`, [answers.firstName, answers.lastName, role.id, answers.manager.id], (err, result) => {
+                                db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`, [answers.firstName, answers.lastName, role.id, answers.manager], (err, result) => {
                                     if (err) throw err;
                                     console.log(`Added ${answers.firstName} ${answers.lastName} to the database.`);
                                     employeeTracker();
